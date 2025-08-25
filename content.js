@@ -216,8 +216,8 @@ function adicionarBotao() {
     configBtn.textContent = '⚙️';
     configBtn.style.cssText = `
         position: fixed;
-        top: 10px;
-        right: 160px;
+        top: 55px;
+        right: 10px;
         z-index: 9999;
         background: #6c757d;
         color: white;
