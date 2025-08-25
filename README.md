@@ -180,12 +180,9 @@ Edite o arquivo `seed_profiles.json` para adicionar/remover perfis:
 3. Commit suas mudanças
 4. Abra um Pull Request
 
-## 📊 Limitações
+## 🔧 Personalização
 
-- **Perfis que você não segue**: Não é possível analisar se não seguir o perfil
-- **Rate limiting**: Instagram pode limitar buscas muito rápidas
-- **Precisão**: Baseada apenas nos perfis seguidos publicamente
-- **Contexto**: Não considera posts ou interações
+Os perfis incluídos são sugestões baseadas em metodologia documentada. Customize a lista editando `seed_profiles.json` respeitando a formatação existente.
 
 ## 🔒 Privacidade
 
