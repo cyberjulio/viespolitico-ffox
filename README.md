@@ -210,6 +210,29 @@ MIT License - veja o arquivo [LICENSE](LICENSE) para detalhes.
 - **Issues**: Reporte bugs ou sugestões nas [Issues](https://github.com/cyberjulio/viespolitico-ffox/issues)
 - **Discussões**: Participe das [Discussions](https://github.com/cyberjulio/viespolitico-ffox/discussions)
 
+## 📄 Licença
+
+Este projeto é licenciado sob **Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License**.
+
+### ✅ Permitido:
+- **Uso pessoal** e educacional gratuito
+- **Modificações** e adaptações
+- **Compartilhamento** com atribuição
+- **Pesquisa** e fins acadêmicos
+
+### ❌ Proibido:
+- **Uso comercial** de qualquer tipo
+- **Venda** da ferramenta ou versões modificadas
+- **Uso empresarial** para lucro
+- **Remoção** de créditos do autor
+
+### 📋 Condições:
+- **Atribuição**: Deve creditar o autor original
+- **Mesma licença**: Modificações devem usar a mesma licença
+- **Indicar mudanças**: Se modificar, deve indicar as alterações
+
+**Esta ferramenta será sempre gratuita e não pode ser comercializada.**
+
 ---
 
 **Desenvolvido por [@cyberjulio](https://github.com/cyberjulio)**
