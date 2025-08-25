@@ -302,4 +302,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('resetBtn').addEventListener('click', resetToDefault);
     document.getElementById('filterCategory').addEventListener('change', filterProfiles);
     document.getElementById('importFile').addEventListener('change', importProfiles);
+    document.getElementById('closeBtn').addEventListener('click', () => {
+        window.close();
+    });
 });
