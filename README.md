@@ -11,16 +11,6 @@ Uma extensão para Firefox que analisa o viés político de perfis do Instagram 
 - ✅ **Zero detecção** pelo Instagram
 - ✅ **Funciona direto da página** do perfil
 
-## 📊 Categorias de Classificação
-
-| Score | Categoria | Descrição |
-|-------|-----------|-----------|
-| -2 | Extrema Esquerda | PSOL, PCdoB, movimentos sociais |
-| -1 | Esquerda | PT, PSB, políticos progressistas |
-| 0 | Centro | PSDB, MDB, políticos moderados |
-| +1 | Direita | NOVO, DEM, liberais conservadores |
-| +2 | Extrema Direita | PL, Bolsonarismo, conservadores |
-
 ## 🚀 Instalação
 
 ### Método 1: Arquivo Instalável (Recomendado)
@@ -201,15 +191,6 @@ MIT License - veja o arquivo [LICENSE](LICENSE) para detalhes.
 
 - **Issues**: Reporte bugs ou sugestões nas [Issues](https://github.com/cyberjulio/viespolitico-ffox/issues)
 - **Discussões**: Participe das [Discussions](https://github.com/cyberjulio/viespolitico-ffox/discussions)
-
-## 📈 Roadmap
-
-- [ ] Publicação na Mozilla Add-ons Store
-- [ ] Análise de posts além de perfis seguidos
-- [ ] Interface gráfica melhorada
-- [ ] Exportação de relatórios
-- [ ] Suporte para Chrome/Edge
-- [ ] API para desenvolvedores
 
 ---
 
