@@ -85,10 +85,17 @@ function renderProfileList() {
                 <span style="color: #666; margin-left: 10px;">[${profile.type}]</span>
             </div>
             <div class="profile-actions">
-                <button onclick="editProfile(${index})">✏️</button>
-                <button onclick="removeProfile(${index})" class="danger">🗑️</button>
+                <button data-action="edit" data-index="${index}">✏️</button>
+                <button data-action="remove" data-index="${index}" class="danger">🗑️</button>
             </div>
         `;
+        
+        // Adicionar event listeners aos botões
+        const editBtn = item.querySelector('[data-action="edit"]');
+        const removeBtn = item.querySelector('[data-action="remove"]');
+        
+        editBtn.addEventListener('click', () => editProfile(index));
+        removeBtn.addEventListener('click', () => removeProfile(index));
         
         container.appendChild(item);
     });
@@ -283,4 +290,16 @@ function showMessage(text, type) {
 }
 
 // Inicializar quando a página carregar
-document.addEventListener('DOMContentLoaded', loadProfiles);
+document.addEventListener('DOMContentLoaded', function() {
+    loadProfiles();
+    
+    // Adicionar event listeners
+    document.getElementById('addProfileBtn').addEventListener('click', addProfile);
+    document.getElementById('exportBtn').addEventListener('click', exportProfiles);
+    document.getElementById('importBtn').addEventListener('click', () => {
+        document.getElementById('importFile').click();
+    });
+    document.getElementById('resetBtn').addEventListener('click', resetToDefault);
+    document.getElementById('filterCategory').addEventListener('change', filterProfiles);
+    document.getElementById('importFile').addEventListener('change', importProfiles);
+});

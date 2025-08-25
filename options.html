@@ -174,14 +174,14 @@
                     <option value="veiculo">Veículo de Mídia</option>
                 </select>
             </div>
-            <button onclick="addProfile()">Adicionar Perfil</button>
+            <button id="addProfileBtn">Adicionar Perfil</button>
         </div>
 
         <div class="section">
             <h3>📋 Lista de Perfis</h3>
             <div class="form-group">
                 <label for="filterCategory">Filtrar por categoria:</label>
-                <select id="filterCategory" onchange="filterProfiles()">
+                <select id="filterCategory">
                     <option value="">Todos</option>
                     <option value="Extrema Direita">Extrema Direita</option>
                     <option value="Direita">Direita</option>
@@ -195,10 +195,10 @@
 
         <div class="section">
             <h3>🔄 Backup e Restauração</h3>
-            <button onclick="exportProfiles()">📤 Exportar Lista</button>
-            <button onclick="document.getElementById('importFile').click()">📥 Importar Lista</button>
-            <button onclick="resetToDefault()" class="danger">🔄 Resetar para Padrão</button>
-            <input type="file" id="importFile" accept=".json" style="display: none;" onchange="importProfiles(event)">
+            <button id="exportBtn">📤 Exportar Lista</button>
+            <button id="importBtn">📥 Importar Lista</button>
+            <button id="resetBtn" class="danger">🔄 Resetar para Padrão</button>
+            <input type="file" id="importFile" accept=".json" style="display: none;">
         </div>
     </div>
 
