@@ -2,6 +2,17 @@
 
 Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 
+## [1.1.1] - 2025-01-25
+
+### Adicionado
+- 📦 Arquivo XPI instalável (viespolitico-firefox-v1.1.0.xpi)
+- 🚀 Instalação simplificada via download direto
+- 📝 Documentação atualizada com duas opções de instalação
+
+### Melhorado
+- 📋 README com instruções de instalação via XPI
+- 🔄 Processo de distribuição simplificado
+
 ## [1.1.0] - 2025-01-25
 
 ### Atualizado
