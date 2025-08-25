@@ -61,7 +61,11 @@ Uma extensão para Firefox que analisa o viés político de perfis do Instagram 
 
 3. **Clique no botão azul** "Analisar Perfil" no canto superior direito
 
-4. **Aguarde a análise** (30-60 segundos para 100 perfis)
+4. **⚠️ IMPORTANTE - Durante a análise**:
+   - **NÃO feche a aba** do navegador
+   - **Pode usar outra janela** do navegador normalmente
+   - **Se quiser usar outra aba**: ANTES de iniciar, arraste esta aba para fora do navegador, separando em duas janelas
+   - **Aguarde 30-60 segundos** para análise completa
 
 5. **Veja o resultado** no popup final
 

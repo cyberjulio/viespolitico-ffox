@@ -236,10 +236,13 @@ function adicionarBotao() {
             chrome.runtime.sendMessage({ action: 'openOptions' });
         }
     };
-    configBtn.title = 'Configurar perfis políticos';
+    configBtn.title = 'Configurar ViésPolítico';
     
     document.body.appendChild(btn);
     document.body.appendChild(configBtn);
+    
+    // Adicionar tooltip detalhado ao botão principal
+    btn.title = 'Clique para iniciar a automação que identifica o viés político. Não feche a aba do navegador. Você pode usar outra janela. Caso queira usar outra aba de navegador, ANTES, arraste esta aba para fora do navegador, separando em duas janelas. Assim a análise funcionará sem problemas.';
 }
 
 // Carregar perfis e adicionar botão
