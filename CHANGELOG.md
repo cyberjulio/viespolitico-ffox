@@ -2,6 +2,13 @@
 
 Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 
+## [1.1.0] - 2025-01-25
+
+### Atualizado
+- 📊 Lista de perfis políticos atualizada (final_profiles_v2.json)
+- 📝 Documentação corrigida: Arthur Lira substituindo Marina Silva nos exemplos do Centro
+- 🔄 Base de dados refinada com perfis mais precisos
+
 ## [1.0.0] - 2025-01-25
 
 ### Adicionado
@@ -25,7 +32,7 @@ Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 ### Perfis Incluídos
 - **Extrema Direita**: Jair Bolsonaro, Nikolas Ferreira, Carla Zambelli
 - **Direita**: Tarcísio de Freitas, Sérgio Moro, Romeu Zema  
-- **Centro**: Simone Tebet, Marina Silva, Eduardo Paes
+- **Centro**: Simone Tebet, Arthur Lira, Eduardo Paes
 - **Esquerda**: Lula, Guilherme Boulos, Fernando Haddad
 - **Extrema Esquerda**: Sâmia Bomfim, Erika Hilton, Ivan Valente
 

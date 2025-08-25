@@ -108,7 +108,7 @@ A extensão analisa **100 perfis** divididos em:
 
 **Extrema Direita**: Jair Bolsonaro, Nikolas Ferreira, Carla Zambelli  
 **Direita**: Tarcísio de Freitas, Sérgio Moro, Romeu Zema  
-**Centro**: Simone Tebet, Marina Silva, Eduardo Paes  
+**Centro**: Simone Tebet, Arthur Lira, Eduardo Paes  
 **Esquerda**: Lula, Guilherme Boulos, Fernando Haddad  
 **Extrema Esquerda**: Sâmia Bomfim, Erika Hilton, Ivan Valente  
 
