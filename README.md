@@ -182,7 +182,7 @@ Edite o arquivo `seed_profiles.json` para adicionar/remover perfis:
 
 ## 📊 Limitações
 
-- **Perfis privados**: Não é possível analisar
+- **Perfis que você não segue**: Não é possível analisar se não seguir o perfil
 - **Rate limiting**: Instagram pode limitar buscas muito rápidas
 - **Precisão**: Baseada apenas nos perfis seguidos publicamente
 - **Contexto**: Não considera posts ou interações
