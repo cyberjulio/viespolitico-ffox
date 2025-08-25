@@ -1,3 +1,12 @@
+/*
+ * ViésPolítico - Análise Política Automática do Instagram
+ * Desenvolvido por @cyberjulio
+ * GitHub: https://github.com/cyberjulio
+ * 
+ * Licença: CC BY-NC-SA 4.0 (Não Comercial)
+ * Este software é gratuito para sempre e não pode ser usado comercialmente.
+ */
+
 // ViesPolítico - Content Script
 console.log('ViesPolítico extension loaded');
 

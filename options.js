@@ -1,3 +1,11 @@
+/*
+ * ViésPolítico - Página de Configurações
+ * Desenvolvido por @cyberjulio
+ * GitHub: https://github.com/cyberjulio
+ * 
+ * Licença: CC BY-NC-SA 4.0 (Não Comercial)
+ */
+
 // ViesPolítico - Options Script
 let profiles = [];
 let defaultProfiles = [];
