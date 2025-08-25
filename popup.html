@@ -1,36 +1,56 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="utf-8">
+    <title>ViesPolítico</title>
     <style>
-        body { width: 300px; padding: 20px; font-family: Arial; }
-        button { width: 100%; padding: 10px; margin: 5px 0; background: #007acc; color: white; border: none; border-radius: 5px; cursor: pointer; }
-        button:hover { background: #005a99; }
-        .instructions { font-size: 12px; color: #666; margin: 10px 0; }
+        body {
+            width: 300px;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .instructions {
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #007acc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #005a99;
+        }
     </style>
 </head>
 <body>
-    <h3>ViesPolítico</h3>
-    
+    <h1>ViesPolítico</h1>
     <div class="instructions">
         1. Vá para um perfil do Instagram<br>
         2. Clique no botão abaixo (abrirá o modal automaticamente)<br>
-        3. Aguarde a análise
-    </div>
-    
-    <button id="analyzeBtn">Analisar Perfil</button>
-    
-    <div class="instructions">
+        3. Aguarde a análise<br><br>
         Os resultados aparecerão no console do navegador (F12)
     </div>
+    <button onclick="analisar()">Analisar Perfil</button>
     
     <script>
-        document.getElementById('analyzeBtn').onclick = function() {
+        function analisar() {
             chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
                 chrome.tabs.executeScript(tabs[0].id, {
-                    code: 'if (typeof analisarPerfil === "function") analisarPerfil(); else alert("Vá para o Instagram primeiro");'
+                    code: 'if (typeof analisarPerfil === "function") analisarPerfil(); else alert("Vá para um perfil do Instagram primeiro!");'
                 });
             });
-        };
+        }
     </script>
 </body>
 </html>
