@@ -77,22 +77,34 @@ Uma extensão para Firefox que analisa o viés político de perfis do Instagram 
 
 ### Exemplo de Resultado
 
+**Exemplo A - Perfil de Direita:**
 ```
 Viés Político
-Análise de @usuario_exemplo:
+Análise de @joaosilva:
 
-Seguindo (7/100):
-• @jairmessiasbolsonaro
+Seguindo (3/100):
 • @tarcisiogdf
-• @simonetebet
-• @lula
-• @guilhermeboulos
-• @cartacapital
-• @revistaforum
+• @sergiomoro_oficial
+• @romeuzemaoficial
 
 Resultado:
-Média final: -0.14
-Inclinação: Centro
+Média final: 1.00
+Inclinação: Direita
+```
+
+**Exemplo B - Perfil de Esquerda:**
+```
+Viés Político
+Análise de @mariasantos:
+
+Seguindo (3/100):
+• @lulaoficial
+• @guilhermeboulos.oficial
+• @haddad_fernando
+
+Resultado:
+Média final: -1.00
+Inclinação: Esquerda
 ```
 
 ## 🔧 Estrutura do Projeto
