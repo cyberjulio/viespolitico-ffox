@@ -1,0 +1,27 @@
+{
+  "manifest_version": 2,
+  "name": "ViesPolítico",
+  "version": "1.0",
+  "description": "Análise política automática do Instagram",
+  
+  "permissions": [
+    "activeTab",
+    "https://www.instagram.com/*"
+  ],
+  
+  "content_scripts": [
+    {
+      "matches": ["https://www.instagram.com/*"],
+      "js": ["content.js"]
+    }
+  ],
+  
+  "web_accessible_resources": [
+    "seed_profiles.json"
+  ],
+  
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_title": "ViesPolítico"
+  }
+}
