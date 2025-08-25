@@ -229,7 +229,15 @@ function adicionarBotao() {
         width: 40px;
     `;
     configBtn.onclick = () => {
-        browser.runtime.openOptionsPage();
+        // Tentar diferentes APIs do Firefox
+        if (typeof browser !== 'undefined' && browser.runtime && browser.runtime.openOptionsPage) {
+            browser.runtime.openOptionsPage();
+        } else if (typeof chrome !== 'undefined' && chrome.runtime && chrome.runtime.openOptionsPage) {
+            chrome.runtime.openOptionsPage();
+        } else {
+            // Fallback: abrir em nova aba
+            window.open(browser.runtime.getURL('options.html'), '_blank');
+        }
     };
     configBtn.title = 'Configurar perfis políticos';
     
