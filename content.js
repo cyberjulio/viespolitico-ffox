@@ -3,12 +3,21 @@ console.log('ViesPolítico extension loaded');
 
 let seedProfiles = [];
 
-// Carregar perfis do arquivo JSON
+// Carregar perfis do storage ou arquivo JSON
 async function carregarPerfis() {
     try {
+        // Tentar carregar perfis customizados primeiro
+        const result = await browser.storage.local.get('customProfiles');
+        if (result.customProfiles && result.customProfiles.length > 0) {
+            seedProfiles = result.customProfiles;
+            console.log(`Carregados ${seedProfiles.length} perfis customizados`);
+            return true;
+        }
+        
+        // Se não houver customizados, carregar padrão
         const response = await fetch(chrome.runtime.getURL('seed_profiles.json'));
         seedProfiles = await response.json();
-        console.log(`Carregados ${seedProfiles.length} perfis políticos`);
+        console.log(`Carregados ${seedProfiles.length} perfis padrão`);
         return true;
     } catch (error) {
         console.error('Erro ao carregar perfis:', error);
@@ -202,7 +211,30 @@ function adicionarBotao() {
     `;
     btn.onclick = analisarPerfil;
     
+    // Adicionar botão de configurações
+    const configBtn = document.createElement('button');
+    configBtn.textContent = '⚙️';
+    configBtn.style.cssText = `
+        position: fixed;
+        top: 10px;
+        right: 140px;
+        z-index: 9999;
+        background: #6c757d;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        width: 40px;
+    `;
+    configBtn.onclick = () => {
+        browser.runtime.openOptionsPage();
+    };
+    configBtn.title = 'Configurar perfis políticos';
+    
     document.body.appendChild(btn);
+    document.body.appendChild(configBtn);
 }
 
 // Carregar perfis e adicionar botão

@@ -2,6 +2,40 @@
 
 Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 
+## [1.2.0] - 2025-01-25
+
+### 🎯 Funcionalidade Principal: Customização de Perfis
+
+#### ✨ Nova Página de Opções
+- **Interface completa** para gerenciar perfis políticos
+- **Adicionar/remover** perfis personalizados
+- **Editar** scores e categorias existentes
+- **Filtros** por categoria política
+- **Estatísticas** em tempo real
+
+#### 🔧 Funcionalidades de Customização
+- **Backup/Restore**: Exportar e importar listas personalizadas
+- **Reset**: Voltar para lista padrão a qualquer momento
+- **Validação**: Verificação automática de duplicatas e formatos
+- **Persistência**: Configurações salvas entre sessões
+
+#### 🎨 Interface Melhorada
+- **Botão de configurações** (⚙️) no Instagram
+- **Cores por categoria** para melhor visualização
+- **Mensagens de feedback** para todas as ações
+- **Design responsivo** e intuitivo
+
+#### 🔄 Compatibilidade
+- **Funciona no XPI**: Usuários podem customizar mesmo na instalação via arquivo
+- **Funciona na instalação manual**: Mantém compatibilidade total
+- **Storage local**: Dados salvos no navegador do usuário
+
+### 🛠️ Melhorias Técnicas
+- Adicionada permissão `storage` no manifest
+- Sistema de fallback: perfis customizados → perfis padrão
+- Validação robusta de dados importados
+- Interface de opções em aba separada
+
 ## [1.1.1] - 2025-01-25
 
 ### Adicionado
