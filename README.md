@@ -116,7 +116,9 @@ viespolitico-ffox/
 ├── popup.html             # Interface do popup
 ├── seed_profiles.json     # Base de 100 perfis políticos
 ├── icons/                 # Ícones da extensão
-└── README.md             # Esta documentação
+├── README.md             # Esta documentação
+├── METODOLOGIA.md        # Metodologia de construção da lista
+└── CHANGELOG.md          # Histórico de versões
 ```
 
 ## 📋 Base de Dados
@@ -182,7 +184,7 @@ Edite o arquivo `seed_profiles.json` para adicionar/remover perfis:
 
 ## 🔧 Personalização
 
-Os perfis incluídos são sugestões baseadas em metodologia documentada. Customize a lista editando `seed_profiles.json` respeitando a formatação existente.
+Os perfis incluídos são sugestões baseadas em metodologia documentada ([ver METODOLOGIA.md](METODOLOGIA.md)). Customize a lista editando `seed_profiles.json` respeitando a formatação existente.
 
 ## 🔒 Privacidade
 
