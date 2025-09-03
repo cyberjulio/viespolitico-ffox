@@ -1,0 +1,83 @@
+Contexto do Projeto — Ferramenta Local “ViesPolítico”
+
+Objetivo
+
+Construir uma ferramenta local/CLI que estima a inclinação política de qualquer perfil público do Instagram informado pelo operador, usando uma base interna (~100 perfis) com pontuações ideológicas pré-definidas (−2 a +2).
+A ferramenta roda apenas na máquina do usuário (clonada do GitHub), usando as credenciais do próprio operador para login no Instagram e scraping não-oficial.
+
+Uso (CLI)
+
+./viespolitico login -u <SEU_USUARIO_INSTAGRAM>
+./viespolitico analyze -p @perfilalvo
+# alias curto:
+./viespolitico -p @perfilalvo
+
+Fluxo (análise de perfil público)
+	1.	Login local (uma vez): o operador autentica com seu usuário Instagram (2FA suportado). A sessão (cookies) é salva em disco.
+	2.	Entrada: @perfilalvo (perfil público de terceiros).
+	3.	Coleta de “followings” do alvo (lista de quem o alvo segue), via endpoints web/GraphQL não-oficiais com paginação. Cache por 24–48h.
+	4.	Cruzamento com base interna (~100 perfis com score −2..+2).
+	5.	Curtidas (amostragem, opcional): para cada perfil “semente” encontrado nos followings, inspecionar K posts recentes (ex.: 3–5). Se a lista de “likers” estiver disponível e contiver o @perfilalvo, aplicar reforço. Se likes ocultos/indisponíveis, pular sem travar o processo.
+	6.	Pontuação e classificação:
+	•	Sinal de seguir: peso 1.0 × score do perfil semente.
+	•	Sinal de curtir (se detectado): +2.0 de peso adicional para aquele perfil semente.
+	•	score_final = soma(score_seed × peso_seed) / soma(pesos)
+	•	Mapeamento → 5 faixas:
+1 = Extrema Esquerda, 2 = Esquerda, 3 = Centro, 4 = Direita, 5 = Extrema Direita.
+	7.	Saída:
+	•	Exibir score, faixa, e top evidências (perfis semente que mais pesaram).
+	•	Gerar imagem compartilhável (template por faixa + texto: “Eu fiz o teste no QualTeuLado.com.br e sou !”), salva em ./output/resultado-<perfilalvo>.png.
+
+Stack & Estrutura (sugestão)
+	•	Python 3.11+, Instaloader (login/scraping), Typer/Rich (CLI), Pillow (imagem), SQLite/JSON (cache), Tenacity (retry/backoff).
+	•	Pastas:
+
+viespolitico/
+  core/ (auth, instagram, scoring, imagegen, cache)
+  data/ (seed_profiles.json, templates/)
+  vp_cli.py
+  requirements.txt
+  README.md
+
+	•	data/seed_profiles.json (exemplo):
+
+[
+  {"handle": "perfil_esq_1", "score": -2},
+  {"handle": "perfil_esq_2", "score": -1},
+  {"handle": "perfil_centro", "score": 0},
+  {"handle": "perfil_dir_1", "score": 1},
+  {"handle": "perfil_dir_2", "score": 2}
+]
+
+Buckets (ajustáveis)
+	•	score ≤ -1.5 → Extrema Esquerda
+	•	(-1.5, -0.5] → Esquerda
+	•	(-0.5, 0.5] → Centro
+	•	(0.5, 1.5] → Direita
+	•	> 1.5 → Extrema Direita
+
+Limites & Comportamento
+	•	Perfis privados: não analisáveis (sem aprovação). Mostrar mensagem clara.
+	•	Likes ocultos: ignorar reforço de curtidas; seguir só com o sinal de “seguir”.
+	•	Listas enormes: impor limite de varredura (ex.: máx. 5.000 followings); avisar se truncado.
+	•	Rate limiting / anti-bot: inserir sleep + jitter entre chamadas, retry com backoff em 429/“Please wait…”. Permitir proxy via .env.
+	•	Caches: followings e resultados por 24–48h para reduzir carga.
+	•	Seguir/desseguir alvo: não é obrigatório para perfil público; pode melhorar estabilidade. Se usar, respeitar limites e desseguir ao final.
+
+Segurança, Legal & Transparência
+	•	Local only: nenhum dado sai da máquina do operador (exceto chamadas ao Instagram).
+	•	Credenciais: não salvar senha; salvar apenas sessão (cookies). Suporte a keychain local opcional.
+	•	ToS: scraping/automação podem violar os Termos do Instagram. Deixar disclaimer no README: uso educacional, por conta e risco do usuário.
+	•	Explicabilidade: exibir quais perfis contribuíram para o resultado e como (seguir/curtir) para confiança do usuário.
+
+Roadmap (mínimo viável → robusto)
+	1.	MVP: followings → score → imagem (sem curtidas).
+	2.	Curtidas amostradas (K posts por perfil semente) com fallback.
+	3.	Cache SQLite + retries/backoff + limites configuráveis.
+	4.	UI simples opcional (Streamlit).
+	5.	Calibração de thresholds com perfis conhecidos.
+
+⸻
+
+Resumo curto (1 linha):
+Ferramenta CLI local que, com o login do operador no Instagram, analisa qualquer perfil público (-p @perfilalvo) cruzando quem ele segue com uma base de ~100 perfis politicamente pontuados, opcionalmente reforçando por curtidas, e entrega um score (5 faixas) + imagem compartilhável; tudo com cache, rate-limit e disclaimers de ToS.

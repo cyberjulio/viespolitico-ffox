@@ -8,7 +8,27 @@
  */
 
 // ViesPolítico - Content Script
-console.log('ViesPolítico extension loaded');
+
+// Sistema de logs automático
+let debugLogs = [];
+function log(message) {
+    const timestamp = new Date().toLocaleTimeString();
+    const logEntry = `[${timestamp}] ${message}`;
+    console.log(logEntry);
+    debugLogs.push(logEntry);
+}
+
+function saveLogs() {
+    const logContent = debugLogs.join('\n');
+    const blob = new Blob([logContent], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `viespolitico-debug-${new Date().toISOString().slice(0,19).replace(/:/g,'-')}.log`;
+    a.click();
+    URL.revokeObjectURL(url);
+}
+log('ViesPolítico extension loaded');
 
 let seedProfiles = [];
 
@@ -19,14 +39,14 @@ async function carregarPerfis() {
         const result = await browser.storage.local.get('customProfiles');
         if (result.customProfiles && result.customProfiles.length > 0) {
             seedProfiles = result.customProfiles;
-            console.log(`Carregados ${seedProfiles.length} perfis customizados`);
+            log(`Carregados ${seedProfiles.length} perfis customizados`);
             return true;
         }
         
         // Se não houver customizados, carregar padrão
         const response = await fetch(chrome.runtime.getURL('seed_profiles.json'));
         seedProfiles = await response.json();
-        console.log(`Carregados ${seedProfiles.length} perfis padrão`);
+        log(`Carregados ${seedProfiles.length} perfis padrão`);
         return true;
     } catch (error) {
         console.error('Erro ao carregar perfis:', error);
@@ -35,7 +55,7 @@ async function carregarPerfis() {
 }
 
 async function analisarPerfil() {
-    console.log('Iniciando análise completa...');
+    log('Iniciando análise completa...');
     
     // Extrair nome do perfil da URL ou página
     let profileName = '';
@@ -52,7 +72,7 @@ async function analisarPerfil() {
         }
     }
     
-    console.log(`Analisando perfil: ${profileName}`);
+    log(`Analisando perfil: ${profileName}`);
     
     // Carregar perfis se necessário
     if (seedProfiles.length === 0) {
@@ -67,7 +87,7 @@ async function analisarPerfil() {
     let modal = document.querySelector('[role="dialog"]');
     
     if (!modal) {
-        console.log('Abrindo modal de seguidos...');
+        log('Abrindo modal de seguidos...');
         
         // Procurar link de "following/seguindo"
         const followingSelectors = [
@@ -124,7 +144,7 @@ async function analisarPerfil() {
         return;
     }
     
-    console.log(`Iniciando análise com ${seedProfiles.length} perfis...`);
+    log(`Iniciando análise com ${seedProfiles.length} perfis...`);
     const matches = [];
     
     for (let i = 0; i < seedProfiles.length; i++) {
@@ -134,7 +154,7 @@ async function analisarPerfil() {
         const btn = document.getElementById('viespolitico-btn');
         if (btn) btn.textContent = `${i+1}/${seedProfiles.length}: @${profile.username}`;
         
-        console.log(`[${i+1}/${seedProfiles.length}] Testando @${profile.username}...`);
+        log(`[${i+1}/${seedProfiles.length}] Testando @${profile.username}...`);
         
         // Limpar e digitar
         searchBox.value = '';
@@ -142,44 +162,54 @@ async function analisarPerfil() {
         searchBox.value = profile.username;
         searchBox.dispatchEvent(new Event('input', { bubbles: true }));
         
-        // Aguardar resultado aparecer (máximo 5 segundos)
+        log(`Digitado: "${profile.username}" - Aguardando resultado...`);
+        
+        // Aguardar resultado aparecer (máximo 10 segundos)
         let found = false;
         let attempts = 0;
-        const maxAttempts = 25; // 5 segundos (25 x 200ms)
+        const maxAttempts = 15; // 3 segundos (15 x 200ms)
         
         while (attempts < maxAttempts && !found) {
             await new Promise(resolve => setTimeout(resolve, 200));
             attempts++;
             
-            const allElements = modal.querySelectorAll('*');
+            const allElements = Array.from(modal.querySelectorAll('*'));
             
-            // Verificar se apareceu "No results found"
+            // Debug: contar elementos visíveis
+            const visibleElements = allElements.filter(el => el.offsetParent !== null);
+            log(`Tentativa ${attempts}: ${visibleElements.length} elementos visíveis`);
+            
+            // Verificar se encontrou o perfil com métodos mais rigorosos
             for (let element of allElements) {
-                if (element.textContent && 
-                    element.textContent.includes('No results found') && 
+                // Método 1: Link direto (mais confiável)
+                if (element.href && 
+                    element.href.includes(`instagram.com/${profile.username}`) && 
                     element.offsetParent !== null) {
-                    console.log(`NOT FOUND: @${profile.username} - "No results found" detectado`);
-                    found = false;
-                    attempts = maxAttempts; // Sair do loop
-                    break;
-                }
-            }
-            
-            if (attempts >= maxAttempts) break;
-            
-            // Verificar se encontrou o perfil
-            for (let element of allElements) {
-                if (element.href && element.href.includes(profile.username) && element.offsetParent !== null) {
                     found = true;
+                    log(`✅ FOUND via href: @${profile.username} - ${element.href}`);
                     break;
                 }
                 
-                if (element.textContent && 
-                    element.textContent.toLowerCase().includes(profile.username.toLowerCase()) && 
-                    element.offsetParent !== null &&
-                    element.textContent.trim().length < 200 &&
-                    !element.textContent.includes('No results found')) {
+                // Método 2: Texto exato do username em elementos pequenos
+                if (element.textContent && element.offsetParent !== null) {
+                    const text = element.textContent.trim();
+                    
+                    // Deve ser exatamente o username ou @username, em elemento pequeno
+                    if ((text === profile.username || text === '@' + profile.username) && 
+                        text.length < 50) {
+                        found = true;
+                        log(`✅ FOUND via exact text: @${profile.username} - "${text}"`);
+                        break;
+                    }
+                }
+                
+                // Método 3: Alt text de imagem de perfil
+                if (element.tagName === 'IMG' && 
+                    element.alt && 
+                    element.alt.toLowerCase().includes(profile.username.toLowerCase()) &&
+                    element.alt.includes('profile picture')) {
                     found = true;
+                    log(`✅ FOUND via profile image: @${profile.username} - ${element.alt}`);
                     break;
                 }
             }
@@ -187,16 +217,16 @@ async function analisarPerfil() {
         
         if (found) {
             matches.push(profile);
-            console.log(`MATCH: @${profile.username} (score: ${profile.score})`);
+            log(`MATCH: @${profile.username} (score: ${profile.score})`);
         } else {
-            console.log(`NO MATCH: @${profile.username}`);
+            log(`NO MATCH: @${profile.username} - Não encontrado após ${maxAttempts} tentativas`);
         }
         
-        await new Promise(resolve => setTimeout(resolve, 200));
+        await new Promise(resolve => setTimeout(resolve, 500));
     }
     
     // Resultados
-    console.log(`\nTotal de matches: ${matches.length}`);
+    log(`\nTotal de matches: ${matches.length}`);
     
     if (matches.length > 0) {
         // Contar distribuição por categoria
@@ -237,6 +267,7 @@ async function analisarPerfil() {
             }
         } else {
             // Usar média tradicional para casos balanceados
+            // Usar média tradicional para casos balanceados
             finalScore = matches.reduce((sum, m) => sum + m.score, 0) / matches.length;
             if (finalScore <= -1.5) classification = 'Extrema Esquerda';
             else if (finalScore <= -0.5) classification = 'Esquerda';
@@ -245,7 +276,11 @@ async function analisarPerfil() {
             else classification = 'Extrema Direita';
         }
         
-        alert(`Viés Político\nAnálise de @${profileName}:\n\nSeguindo (${matches.length}/100):\n${matches.map(m => `• @${m.username}`).join('\n')}\n\nDistribuição:\n• Extrema Direita: ${counts.extremaDireita}\n• Direita: ${counts.direita}\n• Centro: ${counts.centro}\n• Esquerda: ${counts.esquerda}\n• Extrema Esquerda: ${counts.extremaEsquerda}\n\nResultado:\nInclinação: ${classification}`);
+        alert(`Viés Político\nAnálise de @${profileName}:\n\nSeguindo (${matches.length}/100):\n${matches.map(m => `• @${m.username}`).join('\n')}\n\nDistribuição:\n• Extrema Direita: ${counts.extremaDireita}\n• Direita: ${counts.direita}\n• Centro: ${counts.centro}\n• Esquerda: ${counts.esquerda}\n• Extrema Esquerda: ${counts.extremaEsquerda}\n\nResultado:\nInclinação: ${classification}\n\nVersão: 1.4.4-dev`);
+        
+        // Salvar logs automaticamente
+        log('Análise concluída. Salvando logs...');
+        saveLogs();
     } else {
         alert(`Viés Político\nAnálise de @${profileName}:\n\nSeguindo (0/100):\nNenhum político encontrado\n\nResultado:\nPerfil apolítico ou privado`);
     }

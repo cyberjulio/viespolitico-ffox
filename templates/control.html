@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ViesPolítico - Controle Web</title>
+    <meta charset="utf-8">
+    <style>
+        body { font-family: Arial; margin: 20px; background: #1a1a1a; color: #fff; }
+        .container { max-width: 800px; margin: 0 auto; }
+        .header { text-align: center; margin-bottom: 30px; }
+        .step { background: #2a2a2a; padding: 15px; margin: 10px 0; border-radius: 8px; }
+        .active { border-left: 4px solid #00ff00; }
+        .button { background: #007acc; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin: 5px; }
+        .button:hover { background: #005a99; }
+        .results { background: #0a3a0a; padding: 15px; border-radius: 8px; margin-top: 20px; }
+        .match { color: #00ff00; margin: 5px 0; }
+        .progress { background: #333; height: 20px; border-radius: 10px; margin: 10px 0; }
+        .progress-bar { background: #007acc; height: 100%; border-radius: 10px; width: 0%; transition: width 0.3s; }
+        #status { font-weight: bold; color: #00ff00; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 ViesPolítico - Análise de @{{ target }}</h1>
+            <p>Status: <span id="status">Aguardando...</span></p>
+        </div>
+
+        <div class="step active" id="step1">
+            <h3>📋 Passo 1: Login no Instagram</h3>
+            <p>1. Abra uma nova aba: <a href="https://www.instagram.com/accounts/login/" target="_blank" style="color: #007acc;">Instagram Login</a></p>
+            <p>2. Faça login normalmente</p>
+            <p>3. Volte para esta aba quando estiver logado</p>
+            <button class="button" onclick="nextStep()">✅ Estou logado</button>
+        </div>
+
+        <div class="step" id="step2" style="display: none;">
+            <h3>👤 Passo 2: Ir para o perfil</h3>
+            <p>1. Abra: <a href="https://www.instagram.com/{{ target }}/" target="_blank" style="color: #007acc;">@{{ target }}</a></p>
+            <p>2. Clique no número de <strong>seguindo/following</strong></p>
+            <p>3. Aguarde o modal abrir</p>
+            <button class="button" onclick="startAnalysis()">🚀 Modal aberto, iniciar análise</button>
+        </div>
+
+        <div class="step" id="step3" style="display: none;">
+            <h3>🔍 Passo 3: Análise Automática</h3>
+            <p>A busca está rodando automaticamente...</p>
+            <div class="progress">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <p>Progresso: <span id="progressText">0/{{ seed_profiles|length }}</span></p>
+            <div id="results" class="results" style="display: none;">
+                <h4>✅ Matches encontrados:</h4>
+                <div id="matchList"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        let analysisRunning = false;
+        let matchCount = 0;
+        let totalProfiles = {{ seed_profiles|length }};
+        let seedProfiles = {{ seed_profiles|tojson }};
+
+        function nextStep() {
+            document.getElementById('step1').style.display = 'none';
+            document.getElementById('step2').style.display = 'block';
+            document.getElementById('step2').classList.add('active');
+            currentStep = 2;
+            updateStatus('Aguardando navegação para perfil...');
+        }
+
+        function startAnalysis() {
+            document.getElementById('step2').style.display = 'none';
+            document.getElementById('step3').style.display = 'block';
+            document.getElementById('step3').classList.add('active');
+            currentStep = 3;
+            analysisRunning = true;
+            updateStatus('Análise em andamento...');
+            runAnalysis();
+        }
+
+        function updateStatus(text) {
+            document.getElementById('status').textContent = text;
+        }
+
+        function updateProgress(current, total) {
+            const percent = (current / total) * 100;
+            document.getElementById('progressBar').style.width = percent + '%';
+            document.getElementById('progressText').textContent = current + '/' + total;
+        }
+
+        function addMatch(username, score, category) {
+            const resultsDiv = document.getElementById('results');
+            const matchList = document.getElementById('matchList');
+            
+            resultsDiv.style.display = 'block';
+            
+            const matchDiv = document.createElement('div');
+            matchDiv.className = 'match';
+            matchDiv.textContent = `@${username} (score: ${score}, categoria: ${category})`;
+            matchList.appendChild(matchDiv);
+            
+            matchCount++;
+        }
+
+        async function runAnalysis() {
+            // Encontrar caixa de pesquisa
+            const searchSelectors = [
+                'input[placeholder*="Search"]',
+                'input[placeholder*="Pesquisar"]',
+                'input[placeholder*="search"]',
+                'input[placeholder*="pesquisar"]'
+            ];
+            
+            let searchBox = null;
+            for (let selector of searchSelectors) {
+                searchBox = document.querySelector(selector);
+                if (searchBox) break;
+            }
+            
+            if (!searchBox) {
+                // Tentar em iframe ou janela popup
+                try {
+                    const frames = document.querySelectorAll('iframe');
+                    for (let frame of frames) {
+                        try {
+                            const frameDoc = frame.contentDocument || frame.contentWindow.document;
+                            for (let selector of searchSelectors) {
+                                searchBox = frameDoc.querySelector(selector);
+                                if (searchBox) break;
+                            }
+                            if (searchBox) break;
+                        } catch (e) {
+                            // Cross-origin iframe, skip
+                        }
+                    }
+                } catch (e) {
+                    console.log('Erro ao acessar iframes:', e);
+                }
+            }
+            
+            if (!searchBox) {
+                updateStatus('❌ Caixa de pesquisa não encontrada');
+                alert('Não foi possível encontrar a caixa de pesquisa. Certifique-se que o modal de seguidos está aberto.');
+                return;
+            }
+
+            updateStatus('🔍 Buscando perfis...');
+            
+            for (let i = 0; i < seedProfiles.length; i++) {
+                const profile = seedProfiles[i];
+                const username = profile.username;
+                const score = profile.score;
+                const category = profile.category || 'Unknown';
+                
+                updateProgress(i + 1, totalProfiles);
+                
+                try {
+                    // Limpar caixa de pesquisa
+                    searchBox.value = '';
+                    searchBox.focus();
+                    
+                    // Digitar username
+                    for (let char of username) {
+                        searchBox.value += char;
+                        searchBox.dispatchEvent(new Event('input', { bubbles: true }));
+                        await sleep(50 + Math.random() * 100);
+                    }
+                    
+                    // Aguardar resultados
+                    await sleep(1000 + Math.random() * 500);
+                    
+                    // Verificar se perfil aparece nos resultados
+                    const resultSelectors = [
+                        `a[href*="/${username}/"]`,
+                        `a[href*="${username}"]`
+                    ];
+                    
+                    let found = false;
+                    for (let selector of resultSelectors) {
+                        const elements = document.querySelectorAll(selector);
+                        for (let element of elements) {
+                            if (element.href && element.href.includes(username) && isVisible(element)) {
+                                found = true;
+                                break;
+                            }
+                        }
+                        if (found) break;
+                    }
+                    
+                    if (found) {
+                        addMatch(username, score, category);
+                        
+                        // Enviar resultado para servidor
+                        await fetch('/api/result', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                username: username,
+                                score: score,
+                                category: category
+                            })
+                        });
+                    }
+                    
+                    // Delay entre buscas
+                    await sleep(300 + Math.random() * 400);
+                    
+                } catch (e) {
+                    console.log(`Erro ao testar @${username}:`, e);
+                }
+            }
+            
+            // Análise completa
+            updateStatus(`✅ Análise concluída! ${matchCount} matches encontrados`);
+            
+            await fetch('/api/complete', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ matches: matchCount })
+            });
+        }
+
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        function isVisible(element) {
+            return element.offsetWidth > 0 && element.offsetHeight > 0;
+        }
+
+        // Verificar status periodicamente
+        setInterval(async () => {
+            try {
+                const response = await fetch('/api/status');
+                const data = await response.json();
+                // Atualizar UI se necessário
+            } catch (e) {
+                // Servidor pode estar offline
+            }
+        }, 2000);
+    </script>
+</body>
+</html>

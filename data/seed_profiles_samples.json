@@ -1,0 +1,48 @@
+{
+  "profiles": [
+    {
+      "handle": "pstu_oficial",
+      "score": -2,
+      "category": "Extrema Esquerda",
+      "description": "Partido Socialista dos Trabalhadores Unificado"
+    },
+    {
+      "handle": "lulaoficial",
+      "score": -1,
+      "category": "Esquerda", 
+      "description": "Luiz Inácio Lula da Silva"
+    },
+    {
+      "handle": "simonetebet",
+      "score": 0,
+      "category": "Centro",
+      "description": "Simone Tebet"
+    },
+    {
+      "handle": "eduardoleite",
+      "score": 1,
+      "category": "Direita",
+      "description": "Eduardo Leite"
+    },
+    {
+      "handle": "jairmessiasbolsonaro",
+      "score": 2,
+      "category": "Extrema Direita",
+      "description": "Jair Bolsonaro"
+    }
+  ],
+  "posts": [
+    {
+      "url": "https://www.instagram.com/p/DKibaHQIaDM/",
+      "score": -1,
+      "category": "Esquerda",
+      "description": "Lula e Macron juntos"
+    },
+    {
+      "url": "https://www.instagram.com/p/C_F0fmlxjnI/",
+      "score": 2,
+      "category": "Extrema Direita", 
+      "description": "Motociata do Bolsonaro"
+    }
+  ]
+}

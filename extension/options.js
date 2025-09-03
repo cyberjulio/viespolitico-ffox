@@ -8,6 +8,13 @@
 
 // ViesPolítico - Options Script
 let profiles = [];
+
+// Fechar com tecla ESC
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        window.close();
+    }
+});
 let defaultProfiles = [];
 
 // Carregar perfis padrão

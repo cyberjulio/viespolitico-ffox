@@ -10,13 +10,15 @@ Uma extensão para Firefox que analisa o viés político de perfis do Instagram 
 - ✅ **Interface simples** - apenas um clique
 - ✅ **Zero detecção** pelo Instagram
 - ✅ **Funciona direto da página** do perfil
+- ✅ **Logs automáticos** para debug
+- ✅ **Timing otimizado** - análise rápida e precisa
 
 ## 🚀 Instalação
 
 ### Instalação Método 1 (XPI - Usuários)
 
 1. **Baixe o arquivo XPI**:
-   - [📦 viespolitico-firefox-v1.2.0.xpi](https://github.com/cyberjulio/viespolitico-ffox/raw/main/viespolitico-firefox-v1.2.0.xpi)
+   - [📦 viespolitico-firefox-v1.4.4.xpi](https://github.com/cyberjulio/viespolitico-ffox/raw/main/viespolitico-firefox-v1.4.4.xpi)
 
 2. **Instale no Firefox**:
    - Arraste o arquivo `.xpi` para o Firefox
