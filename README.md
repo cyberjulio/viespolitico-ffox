@@ -15,7 +15,7 @@ Extensão para Firefox que analisa o viés político de perfis do Instagram base
 ## 📱 Como Usar
 
 1. **Vá para o Instagram** e faça login
-2. **Navegue para qualquer perfil** que deseja analisar
+2. **Navegue para um perfil público** ou que você já segue (perfis privados não funcionam)
 3. **Clique no botão "Analisar Perfil"** no canto superior direito
 4. **Aguarde a análise** (30-60 segundos)
 5. **Veja o resultado** no popup
