@@ -1,5 +1,7 @@
 # ViesPolítico Firefox Extension
 
+![ViésPolítico](viespolitico.png)
+
 Extensão para Firefox que analisa o viés político de perfis do Instagram baseado nos políticos que seguem.
 
 ## 🚀 Instalação
