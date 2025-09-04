@@ -1,4 +1,4 @@
-# <img src="viespoliticologo.png" width="32" height="32" style="vertical-align: middle;"> ViesPolítico Firefox Extension
+# <img src="viespoliticologo.png" style="vertical-align: middle;"> ViesPolítico Firefox Extension
 
 Extensão para Firefox que analisa o viés político de perfis do Instagram baseado nos políticos que seguem.
 
