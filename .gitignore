@@ -7,14 +7,6 @@ src/*/web-ext-artifacts/
 *.log
 debug-*.log
 
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-venv/
-.env
-.env.*
-
 # CREDENCIAIS E DADOS SENSÍVEIS
 *.token
 *.key
@@ -34,9 +26,6 @@ session_*
 *.db
 *.sqlite
 cache/
-data/*.db
-data/*.pkl
-data/*creds*
 
 # Arquivos de contexto privado
 PROJECT_CONTEXT.md
@@ -49,6 +38,3 @@ context.txt
 .DS_Store
 *.tmp
 *.temp
-
-# Node modules
-node_modules/
