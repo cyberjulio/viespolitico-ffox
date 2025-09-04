@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "ViesPolitico",
-  "version": "1.4.4",
+  "version": "1.4.5",
   "description": "Análise política automática do Instagram - Desenvolvido por @cyberjulio",
   
   "background": {
