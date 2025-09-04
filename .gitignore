@@ -1,0 +1,11 @@
+# Sistema
+.DS_Store
+*.tmp
+*.temp
+
+# Desenvolvimento (não vai para o repo público)
+scripts/
+docs/
+builds/
+.github_token
+SECURITY.md

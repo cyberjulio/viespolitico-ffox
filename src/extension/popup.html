@@ -1,0 +1,62 @@
+<!--
+  ViésPolítico - Popup da Extensão
+  Desenvolvido por @cyberjulio
+  GitHub: https://github.com/cyberjulio
+  Licença: CC BY-NC-SA 4.0 (Não Comercial)
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>ViésPolítico</title>
+    <style>
+        body {
+            width: 300px;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .instructions {
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #007acc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #005a99;
+        }
+    </style>
+</head>
+<body>
+    <h1>ViésPolítico</h1>
+    <div class="instructions">
+        1. Vá para um perfil do Instagram<br>
+        2. Clique no botão abaixo (abrirá o modal automaticamente)<br>
+        3. Aguarde a análise<br><br>
+        Os resultados aparecerão no console do navegador (F12)
+    </div>
+    <button onclick="analisar()">Analisar Perfil</button>
+    
+    <script>
+        function analisar() {
+            chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+                chrome.tabs.executeScript(tabs[0].id, {
+                    code: 'if (typeof analisarPerfil === "function") analisarPerfil(); else alert("Vá para um perfil do Instagram primeiro!");'
+                });
+            });
+        }
+    </script>
+</body>
+</html>
