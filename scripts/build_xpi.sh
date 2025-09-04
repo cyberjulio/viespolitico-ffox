@@ -34,12 +34,6 @@ cat > "$BUILD_DIR/manifest.json" << EOF
   "version": "${VERSION}",
   "description": "Análise política automática do Instagram - Desenvolvido por @cyberjulio",
   
-  "browser_specific_settings": {
-    "gecko": {
-      "id": "viespolitico-extension@mozilla.org"
-    }
-  },
-  
   "background": {
     "scripts": ["background.js"],
     "persistent": false
