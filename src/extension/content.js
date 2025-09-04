@@ -278,9 +278,6 @@ async function analisarPerfil() {
         
         alert(`Viés Político\nAnálise de @${profileName}:\n\nSeguindo (${matches.length}/100):\n${matches.map(m => `• @${m.username}`).join('\n')}\n\nDistribuição:\n• Extrema Direita: ${counts.extremaDireita}\n• Direita: ${counts.direita}\n• Centro: ${counts.centro}\n• Esquerda: ${counts.esquerda}\n• Extrema Esquerda: ${counts.extremaEsquerda}\n\nResultado:\nInclinação: ${classification}\n\nVersão: 1.4.4`);
         
-        // Salvar logs automaticamente
-        log('Análise concluída. Salvando logs...');
-        saveLogs();
     } else {
         alert(`Viés Político\nAnálise de @${profileName}:\n\nSeguindo (0/100):\nNenhum político encontrado\n\nResultado:\nPerfil apolítico ou privado`);
     }
