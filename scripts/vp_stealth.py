@@ -21,8 +21,11 @@ console = Console()
 class StealthInstagramScraper:
     def __init__(self):
         self.driver = None
-        self.profile_dir = "/Users/cyberjulio/Coding/viespolitico/chrome_profile"
-        self.cookies_file = "/Users/cyberjulio/Coding/viespolitico/instagram_cookies.pkl"
+        # Use relative paths from script directory
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        project_dir = os.path.dirname(script_dir)
+        self.profile_dir = os.path.join(project_dir, "chrome_profile")
+        self.cookies_file = os.path.join(project_dir, "data", "instagram_cookies.pkl")
         
     def setup_driver(self):
         try:

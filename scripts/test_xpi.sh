@@ -54,7 +54,7 @@ test_xpi() {
 }
 
 # Testar XPIs
-cd /Users/cyberjulio/Coding/viespolitico
+cd "$(dirname "$0")/.."
 
 echo "1. XPI Original (problemático):"
 test_xpi "xpi_build/viespolitico-final.xpi" "XPI Original"

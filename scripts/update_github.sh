@@ -4,7 +4,7 @@
 
 echo "🔄 Atualizando repositório GitHub..."
 
-cd /Users/cyberjulio/Coding/viespolitico
+cd "$(dirname "$0")/.."
 
 # Ler token do arquivo de credenciais
 if [ ! -f ".github_token" ]; then

@@ -90,7 +90,7 @@ viespolitico-firefox-v1.2.1-webext.xpi
 Execute o script de teste para verificar qualquer XPI:
 
 ```bash
-cd /Users/cyberjulio/Coding/viespolitico
+cd /path/to/viespolitico
 ./test_xpi.sh
 ```
 
