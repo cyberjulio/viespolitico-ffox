@@ -13,6 +13,30 @@ __pycache__/
 *$py.class
 venv/
 .env
+.env.*
+
+# CREDENCIAIS E DADOS SENSÍVEIS
+*.token
+*.key
+.github_token
+auth_*
+credentials*
+instacreds*
+*password*
+*secret*
+
+# Cookies e sessões
+*.pkl
+*.cookies
+session_*
+
+# Cache e dados
+*.db
+*.sqlite
+cache/
+data/*.db
+data/*.pkl
+data/*creds*
 
 # Arquivos de contexto privado
 PROJECT_CONTEXT.md
@@ -26,12 +50,5 @@ context.txt
 *.tmp
 *.temp
 
-# Node modules (se usar)
+# Node modules
 node_modules/
-
-# Tokens e credenciais SECRETAS
-.github_token
-*.token
-*.key
-.env
-.env.*
