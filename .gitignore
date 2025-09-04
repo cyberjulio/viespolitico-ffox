@@ -1,40 +1,11 @@
-# Builds
-builds/*.xpi
-builds/*.zip
-src/*/web-ext-artifacts/
-
-# Logs
-*.log
-debug-*.log
-
-# CREDENCIAIS E DADOS SENSÍVEIS
-*.token
-*.key
-.github_token
-auth_*
-credentials*
-instacreds*
-*password*
-*secret*
-
-# Cookies e sessões
-*.pkl
-*.cookies
-session_*
-
-# Cache e dados
-*.db
-*.sqlite
-cache/
-
-# Arquivos de contexto privado
-PROJECT_CONTEXT.md
-projeto_contexto.md
-context.txt
-*context*
-*CONTEXT*
-
-# Temporários
+# Sistema
 .DS_Store
 *.tmp
 *.temp
+
+# Desenvolvimento (não vai para o repo público)
+scripts/
+docs/
+builds/
+.github_token
+SECURITY.md
