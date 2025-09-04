@@ -28,3 +28,10 @@ context.txt
 
 # Node modules (se usar)
 node_modules/
+
+# Tokens e credenciais SECRETAS
+.github_token
+*.token
+*.key
+.env
+.env.*
