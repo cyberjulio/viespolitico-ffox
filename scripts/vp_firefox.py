@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import os
 import sys
 import time
 import random
@@ -312,7 +313,16 @@ def analyze_firefox(target_profile: str):
             return
         
         # Login automatically
-        if not scraper.auto_login("viespolitico@juliocarvalho.com", "XyiNh97NgCoXLai&"):
+        # Credentials should be provided via environment variables
+        username = os.getenv('INSTAGRAM_USERNAME')
+        password = os.getenv('INSTAGRAM_PASSWORD')
+        
+        if not username or not password:
+            console.print("❌ Instagram credentials not found in environment variables", style="red")
+            console.print("Set INSTAGRAM_USERNAME and INSTAGRAM_PASSWORD", style="yellow")
+            return
+            
+        if not scraper.auto_login(username, password):
             console.print("❌ Login automático falhou", style="red")
             return
         

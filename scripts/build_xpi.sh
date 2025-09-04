@@ -36,7 +36,7 @@ cat > "$BUILD_DIR/manifest.json" << EOF
   
   "browser_specific_settings": {
     "gecko": {
-      "id": "viespolitico@cyberjulio.dev"
+      "id": "viespolitico-extension@mozilla.org"
     }
   },
   
