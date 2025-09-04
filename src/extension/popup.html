@@ -47,8 +47,16 @@
         3. Aguarde a análise<br><br>
         Os resultados aparecerão no console do navegador (F12)
     </div>
-    <button id="analisar-btn">Analisar Perfil</button>
+    <button onclick="analisar()">Analisar Perfil</button>
     
-    <script src="popup.js"></script>
+    <script>
+        function analisar() {
+            chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+                chrome.tabs.executeScript(tabs[0].id, {
+                    code: 'if (typeof analisarPerfil === "function") analisarPerfil(); else alert("Vá para um perfil do Instagram primeiro!");'
+                });
+            });
+        }
+    </script>
 </body>
 </html>
