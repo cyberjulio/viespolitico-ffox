@@ -48,3 +48,10 @@ projeto_contexto.md
 context.txt
 *context*
 *CONTEXT*
+
+# Arquivos de build
+*.xpi
+*.zip
+web-ext-artifacts/
+xpi_build/
+xpi_extracted/
