@@ -46,7 +46,7 @@ Uma extensão para Firefox que analisa o viés político de perfis do Instagram 
 
 4. **Clique em "Load Temporary Add-on"**
 
-5. **Selecione o arquivo** `manifest.json` na pasta do projeto
+5. **Selecione o arquivo** `src/extension/manifest.json`
 
 6. **Pronto!** A extensão está instalada
 
@@ -121,14 +121,20 @@ Inclinação: Esquerda
 
 ```
 viespolitico-ffox/
-├── manifest.json           # Configuração da extensão
-├── content.js             # Script principal
-├── popup.html             # Interface do popup
-├── seed_profiles.json     # Base de 100 perfis políticos
-├── icons/                 # Ícones da extensão
-├── README.md             # Esta documentação
-├── METODOLOGIA.md        # Metodologia de construção da lista
-└── CHANGELOG.md          # Histórico de versões
+├── README.md              # Esta documentação
+├── CHANGELOG.md           # Histórico de versões
+├── LICENSE               # Licença do projeto
+├── src/                  # Código fonte
+│   └── extension/        # Arquivos da extensão Firefox
+│       ├── manifest.json # Configuração da extensão
+│       ├── content.js    # Script principal
+│       ├── popup.html    # Interface do popup
+│       ├── options.html  # Página de configurações
+│       ├── seed_profiles.json # Base de 100 perfis políticos
+│       └── icons/        # Ícones da extensão
+├── builds/               # Builds compilados
+├── scripts/              # Scripts de automação
+└── docs/                 # Documentação adicional
 ```
 
 ## 📋 Base de Dados

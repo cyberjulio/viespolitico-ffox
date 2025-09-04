@@ -1,1 +1,0 @@
-# ViesPolítico Core Module

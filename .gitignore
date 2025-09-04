@@ -1,46 +1,18 @@
+# Builds
+builds/*.xpi
+builds/*.zip
+src/*/web-ext-artifacts/
+
 # Logs
 *.log
-npm-debug.log*
+debug-*.log
 
-# Runtime data
-pids
-*.pid
-*.seed
-
-# Coverage directory used by tools like istanbul
-coverage
-
-# Dependency directories
-node_modules/
-
-# Optional npm cache directory
-.npm
-
-# Optional REPL history
-.node_repl_history
-
-# OS generated files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-
-# IDE files
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# Firefox extension files
-web-ext-artifacts/
-*.xpi
-
-# Temporary files
-*.tmp
-*.temp
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
 
 # Arquivos de contexto privado
 PROJECT_CONTEXT.md
@@ -49,9 +21,10 @@ context.txt
 *context*
 *CONTEXT*
 
-# Arquivos de build
-*.xpi
-*.zip
-web-ext-artifacts/
-xpi_build/
-xpi_extracted/
+# Temporários
+.DS_Store
+*.tmp
+*.temp
+
+# Node modules (se usar)
+node_modules/
