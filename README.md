@@ -43,4 +43,4 @@ Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
 
 ---
 
-**Desenvolvido por [@cyberjulio](https://github.com/cyberjulio)**
+**Desenvolvido por [@cyberjulio](https://instagram.com/cyberjulio)**
