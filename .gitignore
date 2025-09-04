@@ -41,3 +41,10 @@ web-ext-artifacts/
 # Temporary files
 *.tmp
 *.temp
+
+# Arquivos de contexto privado
+PROJECT_CONTEXT.md
+projeto_contexto.md
+context.txt
+*context*
+*CONTEXT*
