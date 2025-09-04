@@ -35,11 +35,30 @@ Extensão para Firefox que analisa o viés político de perfis do Instagram base
 - ✅ Funciona localmente no seu navegador
 - ✅ Não envia dados para servidores externos
 
+## 📊 Base de Dados
+
+A extensão utiliza uma [lista sugerida de perfis políticos](src/extension/seed_profiles.json) brasileiros para análise. Esta lista é apenas uma sugestão inicial e pode ser personalizada pelo usuário após a instalação do add-on através das configurações da extensão.
+
+Os perfis incluídos foram categorizados com base em posicionamentos públicos e não representam necessariamente a opinião do desenvolvedor sobre os políticos listados.
+
 ## 📄 Licença
 
 Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
 
 **Esta ferramenta é gratuita e não pode ser comercializada.**
+
+## ⚠️ Disclaimer
+
+Esta ferramenta é fornecida "como está", sem garantias de qualquer tipo, expressas ou implícitas. O desenvolvedor não se responsabiliza por:
+
+- Precisão das análises ou categorizações
+- Uso inadequado da ferramenta
+- Consequências decorrentes do uso da extensão
+- Danos diretos ou indiretos relacionados ao uso
+
+A ferramenta tem fins educacionais e de entretenimento. As análises são baseadas em dados públicos e algoritmos automatizados, podendo não refletir com precisão as preferências políticas reais dos usuários analisados.
+
+O usuário assume total responsabilidade pelo uso da ferramenta e suas consequências.
 
 ---
 
