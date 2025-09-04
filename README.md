@@ -1,4 +1,4 @@
-# <span style="color: blue;">Viés</span><span style="color: red;">Político</span> Firefox Extension
+<h1><span style="color: blue;">Viés</span><span style="color: red;">Político</span> Firefox Extension</h1>
 
 Extensão para Firefox que analisa o viés político de perfis do Instagram baseado nos políticos que seguem.
 
