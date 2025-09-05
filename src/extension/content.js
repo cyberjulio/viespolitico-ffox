@@ -276,10 +276,17 @@ async function analisarPerfil() {
             else classification = 'Extrema Direita';
         }
         
-        alert(`Viés Político\nAnálise de @${profileName}:\n\nSeguindo (${matches.length}/100):\n${matches.map(m => `• @${m.username}`).join('\n')}\n\nDistribuição:\n• Extrema Direita: ${counts.extremaDireita}\n• Direita: ${counts.direita}\n• Centro: ${counts.centro}\n• Esquerda: ${counts.esquerda}\n• Extrema Esquerda: ${counts.extremaEsquerda}\n\nResultado:\nInclinação: ${classification}\n\nVersão: 1.4.5`);
+        alert(`Viés Político\nAnálise de @${profileName}:\n\nSeguindo (${matches.length}/100):\n${matches.map(m => `• @${m.username}`).join('\n')}\n\nDistribuição:\n• Extrema Direita: ${counts.extremaDireita}\n• Direita: ${counts.direita}\n• Centro: ${counts.centro}\n• Esquerda: ${counts.esquerda}\n• Extrema Esquerda: ${counts.extremaEsquerda}\n\nResultado:\nInclinação: ${classification}\n\nVersão: 1.4.6`);
         
     } else {
         alert(`Viés Político\nAnálise de @${profileName}:\n\nSeguindo (0/100):\nNenhum político encontrado\n\nResultado:\nPerfil apolítico ou privado`);
+    }
+    
+    // Fechar modal de seguidos
+    let modalToClose = document.querySelector('[role="dialog"]');
+    if (modalToClose) {
+        const closeBtn = modalToClose.querySelector('button[aria-label="Close"], svg[aria-label="Close"]')?.closest('button');
+        if (closeBtn) closeBtn.click();
     }
     
     // Restaurar botão
